@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demostración de métodos para añadir botones</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .metodo {
+            margin-bottom: 30px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+        
+        .metodo h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .descripcion {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .descripcion p {
+            margin: 5px 0;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .caja {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 60px;
+            margin-bottom: 15px;
+        }
+        
+        button {
+            background: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            color: #667eea;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            background: #f0f0f0;
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .btn-generar {
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+            font-size: 16px;
+        }
+        
+        .btn-generar:hover {
+            background: #5568d3;
+        }
+        
+        .btn-limpiar {
+            background: #e74c3c;
+            color: white;
+            padding: 12px 30px;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        
+        .btn-limpiar:hover {
+            background: #c0392b;
+        }
+        
+        .controles {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: #27ae60;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        
+        .badge.warning {
+            background: #e74c3c;
+        }
+        
+        .codigo {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        .codigo .keyword {
+            color: #ff79c6;
+        }
+        
+        .codigo .function {
+            color: #50fa7b;
+        }
+        
+        .codigo .string {
+            color: #f1fa8c;
+        }
+        
+        .codigo .comment {
+            color: #6272a4;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Demostración de Métodos para Añadir Botones</h1>
+        <p class="subtitle">Compara diferentes formas de crear botones dinámicamente en JavaScript</p>
+        
+        <!-- Sección de selección de elementos -->
+        <div class="metodo" style="background: #e8f5e9; border-color: #4caf50;">
+            <h2 style="color: #2e7d32;">📌 1. getElementById - Selecciona por ID</h2>
+            <div class="descripcion">
+                <p><strong>¿Qué hace?</strong> Selecciona UN elemento por su ID único. Es el método más rápido.</p>
+                <p><strong>Ventajas:</strong> Muy rápido, fácil de usar, devuelve directamente el elemento.</p>
+                <div class="codigo">
+<span class="keyword">const</span> elemento = document.<span class="function">getElementById</span>(<span class="string">"miId"</span>);
+elemento.style.background = <span class="string">"yellow"</span>;
+                </div>
+            </div>
+            <div class="controles">
+                <button class="btn-generar" onclick="probarGetElementById()">Probar getElementById</button>
+            </div>
+            <div class="caja" id="caja-id">
+                <button id="boton-especial">Botón con ID único</button>
+            </div>
+        </div>
+
+        <div class="metodo" style="background: #e8f5e9; border-color: #4caf50;">
+            <h2 style="color: #2e7d32;">📌 2. querySelector - Selecciona el PRIMER elemento</h2>
+            <div class="descripcion">
+                <p><strong>¿Qué hace?</strong> Selecciona el PRIMER elemento que coincida con un selector CSS.</p>
+                <p><strong>Ventajas:</strong> Muy flexible, usa selectores CSS, fácil de leer.</p>
+                <div class="codigo">
+<span class="comment">// Busca el primer elemento con esa clase</span>
+<span class="keyword">const</span> elemento = document.<span class="function">querySelector</span>(<span class="string">".mi-clase"</span>);
+elemento.style.background = <span class="string">"lightblue"</span>;
+                </div>
+            </div>
+            <div class="controles">
+                <button class="btn-generar" onclick="probarQuerySelector()">Probar querySelector</button>
+            </div>
+            <div class="caja" id="caja-query">
+                <button class="boton-query">Primer botón</button>
+                <button class="boton-query">Segundo botón</button>
+                <button class="boton-query">Tercer botón</button>
+            </div>
+        </div>
+
+        <div class="metodo" style="background: #e8f5e9; border-color: #4caf50;">
+            <h2 style="color: #2e7d32;">📌 3. querySelectorAll - Selecciona TODOS los elementos</h2>
+            <div class="descripcion">
+                <p><strong>¿Qué hace?</strong> Selecciona TODOS los elementos que coincidan con un selector CSS.</p>
+                <p><strong>Ventajas:</strong> Devuelve una lista de elementos, puedes recorrerlos todos.</p>
+                <div class="codigo">
+<span class="comment">// Busca TODOS los elementos con esa clase</span>
+<span class="keyword">const</span> elementos = document.<span class="function">querySelectorAll</span>(<span class="string">".mi-clase"</span>);
+elementos.<span class="function">forEach</span>(el => {
+  el.style.background = <span class="string">"lightgreen"</span>;
+});
+                </div>
+            </div>
+            <div class="controles">
+                <button class="btn-generar" onclick="probarQuerySelectorAll()">Probar querySelectorAll</button>
+            </div>
+            <div class="caja" id="caja-query-all">
+                <button class="boton-todos">Botón 1</button>
+                <button class="boton-todos">Botón 2</button>
+                <button class="boton-todos">Botón 3</button>
+                <button class="boton-todos">Botón 4</button>
+            </div>
+        </div>
+
+        <div class="metodo" style="background: #e8f5e9; border-color: #4caf50;">
+            <h2 style="color: #2e7d32;">📌 4. getElementsByClassName - Selecciona por clase</h2>
+            <div class="descripcion">
+                <p><strong>¿Qué hace?</strong> Selecciona TODOS los elementos con una clase específica.</p>
+                <p><strong>Ventajas:</strong> Colección "viva" que se actualiza automáticamente si el DOM cambia.</p>
+                <div class="codigo">
+<span class="comment">// Busca todos los elementos con esa clase</span>
+<span class="keyword">const</span> elementos = document.<span class="function">getElementsByClassName</span>(<span class="string">"mi-clase"</span>);
+<span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="string">0</span>; i &lt; elementos.length; i++) {
+  elementos[i].style.background = <span class="string">"orange"</span>;
+}
+                </div>
+            </div>
+            <div class="controles">
+                <button class="btn-generar" onclick="probarGetElementsByClassName()">Probar getElementsByClassName</button>
+            </div>
+            <div class="caja" id="caja-class">
+                <button class="boton-clase">Botón A</button>
+                <button class="boton-clase">Botón B</button>
+                <button class="boton-clase">Botón C</button>
+            </div>
+        </div>
+
+        <div class="metodo" style="background: #e8f5e9; border-color: #4caf50;">
+            <h2 style="color: #2e7d32;">📌 5. getElementsByTagName - Selecciona por etiqueta HTML</h2>
+            <div class="descripcion">
+                <p><strong>¿Qué hace?</strong> Selecciona TODOS los elementos de un tipo de etiqueta HTML.</p>
+                <p><strong>Ventajas:</strong> Útil cuando quieres todos los botones, divs, etc.</p>
+                <div class="codigo">
+<span class="comment">// Busca TODOS los botones en un contenedor</span>
+<span class="keyword">const</span> caja = document.<span class="function">getElementById</span>(<span class="string">"mi-caja"</span>);
+<span class="keyword">const</span> botones = caja.<span class="function">getElementsByTagName</span>(<span class="string">"button"</span>);
+<span class="keyword">for</span> (<span class="keyword">let</span> boton <span class="keyword">of</span> botones) {
+  boton.style.background = <span class="string">"pink"</span>;
+}
+                </div>
+            </div>
+            <div class="controles">
+                <button class="btn-generar" onclick="probarGetElementsByTagName()">Probar getElementsByTagName</button>
+            </div>
+            <div class="caja" id="caja-tag">
+                <button>Botón X</button>
+                <button>Botón Y</button>
+                <button>Botón Z</button>
+            </div>
+        </div>
+
+        <div class="metodo" style="background: #e8f5e9; border-color: #4caf50;">
+            <h2 style="color: #2e7d32;">📌 6. getElementsByName - Selecciona por atributo name</h2>
+            <div class="descripcion">
+                <p><strong>¿Qué hace?</strong> Selecciona elementos por su atributo "name" (común en formularios).</p>
+                <p><strong>Ventajas:</strong> Útil para trabajar con inputs, radios y checkboxes.</p>
+                <div class="codigo">
+<span class="comment">// Busca elementos con el atributo name="usuario"</span>
+<span class="keyword">const</span> inputs = document.<span class="function">getElementsByName</span>(<span class="string">"usuario"</span>);
+inputs[<span class="string">0</span>].value = <span class="string">"¡Hola!"</span>;
+                </div>
+            </div>
+            <div class="controles">
+                <button class="btn-generar" onclick="probarGetElementsByName()">Probar getElementsByName</button>
+            </div>
+            <div class="caja" id="caja-name">
+                <button name="grupo-botones">Botón con Name 1</button>
+                <button name="grupo-botones">Botón con Name 2</button>
+                <button name="grupo-botones">Botón con Name 3</button>
+            </div>
+        </div>
+        
+        <!-- Método 1: appendChild (RECOMENDADO) -->
+        <div class="metodo">
+            <h2>1. appendChild() <span class="badge">✓ Recomendado</span></h2>
+            <div class="descripcion">
+                <p><strong>¿Qué hace?</strong> Crea elementos nuevos desde cero y los añade al DOM.</p>
+                <p><strong>Ventajas:</strong> Los eventos se mantienen, es más rápido y eficiente.</p>
+                <div class="codigo">
+<span class="keyword">const</span> CAJA = document.<span class="function">querySelector</span>(<span class="string">".caja"</span>);
+
+<span class="keyword">for</span> (<span class="keyword">let</span> k = <span class="string">0</span>; k &lt; <span class="string">10</span>; k++) {
+  <span class="keyword">const</span> BOTON = document.<span class="function">createElement</span>(<span class="string">"button"</span>);
+  BOTON.textContent = <span class="string">`Boton ${k+1}`</span>;
+  BOTON.classList.<span class="function">add</span>(<span class="string">"bt"</span> + k);
+  CAJA.<span class="function">appendChild</span>(BOTON);
+  BOTON.<span class="function">addEventListener</span>(<span class="string">"click"</span>, saludar);
+}
+
+<span class="keyword">function</span> <span class="function">saludar</span>() {
+  <span class="function">alert</span>(<span class="string">"Hola"</span>);
+}
+                </div>
+            </div>
+            <div class="controles">
+                <button class="btn-generar" onclick="generarAppendChild()">Generar Botones</button>
+                <button class="btn-limpiar" onclick="limpiarCaja1()">Limpiar</button>
+            </div>
+            <div class="caja" id="caja1"></div>
+        </div>
+        
+        <!-- Método 2: innerHTML += (NO RECOMENDADO) -->
+        <div class="metodo">
+            <h2>2. innerHTML += <span class="badge warning">✗ No recomendado</span></h2>
+            <div class="descripcion">
+                <p><strong>¿Qué hace?</strong> Reemplaza todo el contenido HTML existente.</p>
+                <p><strong>Problemas:</strong> Elimina eventos anteriores, recrea todo el DOM, es lento.</p>
+                <div class="codigo">
+<span class="keyword">const</span> CAJA = document.<span class="function">querySelector</span>(<span class="string">".caja"</span>);
+
+<span class="keyword">for</span> (<span class="keyword">let</span> k = <span class="string">0</span>; k &lt; <span class="string">10</span>; k++) {
+  CAJA.innerHTML += <span class="string">`&lt;button&gt;Cancelar&lt;/button&gt;`</span>;
+  document.<span class="function">querySelectorAll</span>(<span class="string">"button"</span>)[k].<span class="function">addEventListener</span>(<span class="string">"click"</span>, saludar);
+}
+
+<span class="keyword">function</span> <span class="function">saludar</span>() {
+  <span class="function">alert</span>(<span class="string">"Hola"</span>);
+}
+                </div>
+            </div>
+            <div class="controles">
+                <button class="btn-generar" onclick="generarInnerHTML()">Generar Botones</button>
+                <button class="btn-limpiar" onclick="limpiarCaja2()">Limpiar</button>
+            </div>
+            <div class="caja" id="caja2"></div>
+        </div>
+        
+        <!-- Método 3: insertAdjacentHTML -->
+        <div class="metodo">
+            <h2>3. insertAdjacentHTML() <span class="badge">✓ Buena alternativa</span></h2>
+            <div class="descripcion">
+                <p><strong>¿Qué hace?</strong> Inserta HTML nuevo sin tocar el contenido existente.</p>
+                <p><strong>Ventajas:</strong> Más eficiente que innerHTML +=, no recrea todo.</p>
+                <div class="codigo">
+<span class="keyword">const</span> CAJA = document.<span class="function">querySelector</span>(<span class="string">".caja"</span>);
+
+<span class="keyword">for</span> (<span class="keyword">let</span> k = <span class="string">0</span>; k &lt; <span class="string">10</span>; k++) {
+  CAJA.<span class="function">insertAdjacentHTML</span>(<span class="string">"afterend"</span>, <span class="string">`&lt;button class="bt${k}"&gt;Boton ${k+1}&lt;/button&gt;`</span>);
+  document.<span class="function">querySelector</span>(<span class="string">".bt"</span> + k).<span class="function">addEventListener</span>(<span class="string">"click"</span>, saludar);
+}
+
+<span class="keyword">function</span> <span class="function">saludar</span>() {
+  <span class="function">alert</span>(<span class="string">"Hola"</span>);
+}
+                </div>
+            </div>
+            <div class="controles">
+                <button class="btn-generar" onclick="generarInsertAdjacent()">Generar Botones</button>
+                <button class="btn-limpiar" onclick="limpiarCaja3()">Limpiar</button>
+            </div>
+            <div class="caja" id="caja3"></div>
+        </div>
+    </div>
+
+    <script>
+        // 1. getElementById
+        function probarGetElementById() {
+            const elemento = document.getElementById("boton-especial");
+            elemento.style.background = "yellow";
+            elemento.style.transform = "scale(1.2)";
+            setTimeout(() => {
+                elemento.style.transform = "scale(1)";
+            }, 300);
+            alert("✅ getElementById encontró el botón con ID 'boton-especial'\n\nLo cambió a amarillo temporalmente.");
+        }
+
+        // 2. querySelector
+        function probarQuerySelector() {
+            const elemento = document.querySelector(".boton-query");
+            elemento.style.background = "lightblue";
+            elemento.style.transform = "scale(1.2)";
+            setTimeout(() => {
+                elemento.style.transform = "scale(1)";
+            }, 300);
+            alert("✅ querySelector encontró el PRIMER botón con clase 'boton-query'\n\nSolo cambió el primero, no todos.");
+        }
+
+        // 3. querySelectorAll
+        function probarQuerySelectorAll() {
+            const elementos = document.querySelectorAll(".boton-todos");
+            let contador = 0;
+            elementos.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.background = "lightgreen";
+                    el.style.transform = "scale(1.1)";
+                    setTimeout(() => {
+                        el.style.transform = "scale(1)";
+                    }, 200);
+                    contador++;
+                    if (contador === elementos.length) {
+                        alert(`✅ querySelectorAll encontró TODOS los ${elementos.length} botones\n\nCambió todos a verde, uno por uno.`);
+                    }
+                }, index * 150);
+            });
+        }
+
+        // 4. getElementsByClassName
+        function probarGetElementsByClassName() {
+            const elementos = document.getElementsByClassName("boton-clase");
+            alert(`✅ getElementsByClassName encontró ${elementos.length} botones\n\nAhora los cambiará a naranja...`);
+            for (let i = 0; i < elementos.length; i++) {
+                setTimeout(() => {
+                    elementos[i].style.background = "orange";
+                    elementos[i].style.transform = "scale(1.1)";
+                    setTimeout(() => {
+                        elementos[i].style.transform = "scale(1)";
+                    }, 200);
+                }, i * 150);
+            }
+        }
+
+        // 5. getElementsByTagName
+        function probarGetElementsByTagName() {
+            const caja = document.getElementById("caja-tag");
+            const botones = caja.getElementsByTagName("button");
+            alert(`✅ getElementsByTagName encontró ${botones.length} botones dentro de la caja\n\nLos cambiará a rosa...`);
+            for (let i = 0; i < botones.length; i++) {
+                setTimeout(() => {
+                    botones[i].style.background = "pink";
+                    botones[i].style.transform = "scale(1.1)";
+                    setTimeout(() => {
+                        botones[i].style.transform = "scale(1)";
+                    }, 200);
+                }, i * 150);
+            }
+        }
+
+        // 6. getElementsByName
+        function probarGetElementsByName() {
+            const elementos = document.getElementsByName("grupo-botones");
+            alert(`✅ getElementsByName encontró ${elementos.length} botones con name="grupo-botones"\n\nLos cambiará a violeta...`);
+            for (let i = 0; i < elementos.length; i++) {
+                setTimeout(() => {
+                    elementos[i].style.background = "violet";
+                    elementos[i].style.transform = "scale(1.1)";
+                    setTimeout(() => {
+                        elementos[i].style.transform = "scale(1)";
+                    }, 200);
+                }, i * 150);
+            }
+        }
+        
+        // Método 1: appendChild (RECOMENDADO)
+        function generarAppendChild() {
+            const caja = document.getElementById("caja1");
+            for (let k = 0; k < 10; k++) {
+                const boton = document.createElement("button");
+                boton.textContent = `Botón ${k + 1}`;
+                boton.classList.add("bt" + k);
+                caja.appendChild(boton);
+                boton.addEventListener("click", () => {
+                    alert(`¡Hola desde el Botón ${k + 1}! 👋\n\nEste botón fue creado con appendChild()`);
+                });
+            }
+        }
+
+        function limpiarCaja1() {
+            document.getElementById("caja1").innerHTML = "";
+        }
+
+        // Método 2: innerHTML += (NO RECOMENDADO)
+        function generarInnerHTML() {
+            const caja = document.getElementById("caja2");
+            for (let k = 0; k < 10; k++) {
+                caja.innerHTML += `<button class="btn-inner-${k}">Botón ${k + 1}</button>`;
+                // Nota: Los eventos previos se pierden cada vez que usamos innerHTML +=
+                const botones = caja.querySelectorAll("button");
+                botones[botones.length - 1].addEventListener("click", () => {
+                    alert(`¡Hola desde el Botón ${k + 1}! 👋\n\nEste botón fue creado con innerHTML +=`);
+                });
+            }
+        }
+
+        function limpiarCaja2() {
+            document.getElementById("caja2").innerHTML = "";
+        }
+
+        // Método 3: insertAdjacentHTML
+        function generarInsertAdjacent() {
+            const caja = document.getElementById("caja3");
+            for (let k = 0; k < 10; k++) {
+                caja.insertAdjacentHTML("beforeend", `<button class="bt-adj-${k}">Botón ${k + 1}</button>`);
+                document.querySelector(".bt-adj-" + k).addEventListener("click", () => {
+                    alert(`¡Hola desde el Botón ${k + 1}! 👋\n\nEste botón fue creado con insertAdjacentHTML()`);
+                });
+            }
+        }
+
+        function limpiarCaja3() {
+            document.getElementById("caja3").innerHTML = "";
+        }
+    </script>
+</body>
+</html>
